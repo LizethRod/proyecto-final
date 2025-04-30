@@ -31,3 +31,25 @@ $(".table").on('click','.btnEditarSucursal',function(){
         }
     })
 })
+
+$(".table").on('click','.btnEditarUsuario',function(){
+    let id = $(this).attr('idUsuario');
+
+    $.ajax({
+        url: 'users/'+id+'/edit',
+        type: 'GET',
+        success: function(usuario){
+            $("#nameU").val(usuario.name);
+            $("#idEditarUsuario").val(usuario.id);
+            $("#emailU").val(usuario.email);
+            $("#roleU").val(usuario.role);
+            $("#branch_idU").val(usuario.id_branch);
+            if (usuario.photo == '') {
+                $("#photoU").attr("src", "storage/users/anonymous.png");
+            } else {
+                $("#photoU").attr("src", "storage/" + usuario.photo);
+            }
+
+        }
+    })
+})
